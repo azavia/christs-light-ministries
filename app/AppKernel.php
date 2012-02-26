@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Clm\CoreBundle\ClmCoreBundle(),
             new Clm\PrayerRequestBundle\ClmPrayerRequestBundle(),
+            new Azavia\RadioBundle\AzaviaRadioBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Clm\UserBundle\ClmUserBundle(),
         );
