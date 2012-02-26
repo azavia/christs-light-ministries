@@ -19,7 +19,6 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('azavia_radio');
-        
         $rootNode
         ->children()
         ->scalarNode('processed_track_dir')->defaultValue('%kernel.root_dir%/uploads/tracks/processed')->end()
