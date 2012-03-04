@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends ContainerAware
 {
     /**
-     * @Route("/", "defaults" = {"page" = "index"})
+     * @Route("/", defaults={"page" = "index"})
      * @Route("/{page}.html")
      */
     public function indexAction($page)
