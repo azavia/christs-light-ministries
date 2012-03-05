@@ -1,0 +1,2 @@
+[04-Mar-2012 15:46:39 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 47729 bytes) in /home/christsl/projects/christs_light_ministries/vendor/twig/lib/Twig/Lexer.php on line 88
+[04-Mar-2012 15:47:06 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 202173 bytes) in /home/christsl/projects/christs_light_ministries/vendor/twig/lib/Twig/Compiler.php on line 132

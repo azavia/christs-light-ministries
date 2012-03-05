@@ -1,13 +1,276 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+<title>
+{% block title %}Spiritual Growth and Healing for a Better Life with Christ's Light Ministries{% endblock %}
+</title>
+
+
+        {% block stylesheets %}
+<link type="text/css" href="{{asset('css/main.css')}}" rel="stylesheet">
+{% endblock %}
+
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+{% block metas %}
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=UTF-8">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+
+
+<META Name="Description" Content="{% block description %}A ministry aiming to bring healing and spiritual growth to all and help others to find their true essence through the Light of Christ, regardless of their religious or spiritual path.{% endblock %}">
+<META Name="Keywords" Content="{% block keywords %}spiritual growth, holistic healing, law of attraction, psychic abilities, spirituality{% endblock %}">
+{% endblock %}
+
     </head>
     <body>
+<div id="page">
+<div id="header">
+<img src="{{asset('images/logo.jpg')}}" alt="Logo" id="logo" />
+</div>
+
+<div id="navigation">
+            <div>
+            Need prayer? Call our prayer line<br>
+            <strong>(888) 989-3544</strong>
+            </div>
+
+<ul>
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'index'})}}">
+Home
+</a>
+</li>
+
+<li>
+<a href="http://forums.christslightministries.org/">
+Forums
+</a>
+</li>
+
+<li>
+<a href="http://radio.christslightministries.org/">
+Radio
+</a>
+</li>
+
+<!--
+<li>
+Spiritual Newsletter
+</li>
+-->
+
+<li>
+<a href="{{ path('christslightministries_web_default_index', {'page': 'prayer-request'}) }}">
+Request Prayer
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'holistic-healing'})}}">
+Holistic Healing
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'intuitive-reading'})}}">
+Intuitive Reading
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'donate'})}}">
+Donate
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'words-of-wisdom'})}}">
+Words of Wisdom
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'daily-inspiration'})}}">
+Daily Inspiration
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'spiritual-reflections'})}}">
+Spiritual Reflections
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'who-is-god'})}}">
+Who is God?
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'spiritual-journey'})}}">
+The Spiritual Journey
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'law-of-attraction'})}}">
+Law of Attraction
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'prayers'})}}">
+Prayers
+</a>
+</li>
+
+<li>
+<a href="{{path('christslightministries_web_default_index', {'page':'alternative-healing'})}}">
+Alternative Healing
+</a>
+</li>
+
+</ul>
+</div>
+<div id="content">
+
+<h1 style="text-align:center">
+{% block header %}A Life of Inspiration is Within Reach<br>
+The End of All Suffering is at Hand<br>
+A Life of Spiritual Growth is the Answer{% endblock %}
+</h1>
+
         {% block body %}{% endblock %}
+</div>
+<div id="sidebar">
+<div>
+<h3>Search Christ's Light Ministries</h3>
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('013911021771413477836:8cg4etm8gi4');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+</div>
+
+<div>
+			<h3><a  href="{{path('christslightministries_web_default_index', {'page':'daily-inspiration-50-you-are-an-effect-not-a-cause'})}}">
+Daily Inspiration<br>November 16, 2011
+</a>
+</h3>
+            <p style="border:1px solid #0000FF">Is it you who puts things into motion, or are you merely the effect of something already in motion?</p>
+<p><a  href="{{path('christslightministries_web_default_index', {'page':'daily-inspiration-50-you-are-an-effect-not-a-cause'})}}" title="Read the rest of this entry">
+More...
+</a>
+</p>
+<p><a  href="{{path('christslightministries_web_default_index', {'page':'daily-inspiration'})}}">
+<small>Archive of Daily Inspiration</small>
+</a>
+</p>
+</div>
+
+<div>
+<h3>Latest Forum Discussions</h3>
+<script type="text/javascript" src="http://forums.christslightministries.org/external.php?type=js"></script>
+<script type="text/javascript">
+document.write("<p>Showing " + threads.length + " recent threads.</p>\n");
+document.write("<ol>\n");
+for (var i = 0; i < threads.length; i++)
+{
+document.write("<li><a href=\"http://forums.christs-light-ministries.org/threads/" +
+threads[i].threadid + "\">" +
+threads[i].title + "</a><br>\n" +
+"Started by " +
+threads[i].poster + "<br>\n" +
+"Posted on " +
+threads[i].threaddate + " at " +
+threads[i].threadtime + ".</li>\n");
+}
+document.write("</ol>\n\n");
+</script>
+</div>
+
+<div>
+        <h3>Featured Testimonial</h3>
+        <p>I had a holistic healing session with <a  href="{{path('christslightministries_web_default_index', {'page':'brandon'})}}">
+Brandon
+</a> over Skype two nights ago.  We spent some time talking and began going over the questions I had answered on his form.  Slowly with no pressure we made our way through each one and by the end there had already been a shift.  But the healing did not end there.</p>
+<p>A large focus of the healing is about a shift from living in "ought" or "obligation" to living in "inspiration". The day after the healing session I continued to clean using HoÊ»oponopono and also <em>The Work</em>.  That night I had a series of dreams that began with frustration and disturbing feelings.  Each of those dreams was cleaned and by morning, even though there was a line of memories waiting to be cleaned there was an obvious shiftâ€¦. (<a  href="http://www.christs-light-ministries.org/the-healing-continues.html"><small>Read More</small></a>)</p>
+</div>
+<!--
+<div>
+<h3>Want a Weekly Dose of Inspiration, Motivation, and Practical Spiritual Tips in Your Inbox?</h3>
+
+<p>Subscribe to the <i>Spiritual Growth E-Zine</i> for free tips, practical articles and practices that you can apply today for a more fulfilling life.</p>
+
+        <form action="http://www.christs-light-ministries.org/cgi-bin/mailout/mailmgr.cgi" method="post">
+<input type="hidden" name="list_id" value="21107432">
+<input type="hidden" name="action" value="subscribe">
+<table cellpadding="5" cellspacing="0" border="1" align="" bgcolor="#ffffff">
+<tr>
+<td valign="top" align="center"><b>Email</b><br><input name="email" type="text" size="12"><br>
+<b>Name</b><br>
+<input name="name" type="text" size="12"><br>
+<font size="1"><b>Then</b><br>
+<input type="SUBMIT" value="Subscribe" name="SUBMIT"><br>
+Don't worry -- your e-mail address is totally secure.<br>
+I promise to use it <b>only</b> to send you Spiritual Growth E-Zine.</font>
+</td>
+</tr>
+</table>
+</form>
+</div>
+-->
+
+<div>
+        <h3><a  href="http://www.christs-light-ministries.org/jesus-messages.html">Jesus' Messages</a></h3>
+<dl id="recent-jesus-messages">
+<dt>
+<a  href="http://www.christs-light-ministries.org/jesus-message-147-august-14-2011.html">
+<b>Jesus' Message #147: August 14, 2011</b>
+</a>
+</dt>
+<dd>
+Jesus' message teaches that we all are manifestations of the light of Christ and the love of God; we all come out of the light and return to it. Jesus focuses on the oneness of all, teaching that we are allays in the presence of God.
+</dd>
+
+<dt>
+<a  href="http://www.christs-light-ministries.org/jesus-message-146-august-13-2011.html">
+<b>Jesus' Message #146: August 13, 2011</b>
+</a>
+</dt>
+<dd>
+Jesus' message says that we must do good to all, regardless whether another does good or evil to us. Jesus also says, however, that we must stand up for our own dignity.
+</dd>
+
+<dt>
+<a  href="http://www.christs-light-ministries.org/jesus-message-145-august-12-2011.html">
+<b>Jesus' Message #145: August 12, 2011</b>
+</a>
+</dt>
+<dd>
+Jesus' message says that we hold direct all recognition and praise to God, and not attempt to take this recognition ourselves, for this leads to greater selfishness, while giving it only to God leads to greater love.
+</dd>
+
+</dl>
+</div>
+</div>
+
+<div id="footer">
+<p>Copyright &copy; 2012 Brandon Olivares.</p>
+</div>
+</div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
