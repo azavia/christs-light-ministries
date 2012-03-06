@@ -1,6 +1,6 @@
 <?php
 
-namespace ChristsLightMinistries\WebBundle\Tests\Controller;
+namespace Clm\CoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

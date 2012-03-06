@@ -1,5 +1,5 @@
-ChristsLightMinistriesWebBundle:
-    resource: "@ChristsLightMinistriesWebBundle/Controller/"
+ClmCoreBundle:
+    resource: "@ClmCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 

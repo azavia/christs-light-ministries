@@ -1,6 +1,6 @@
 <?php
 
-namespace ChristsLightMinistries\WebBundle\Controller;
+namespace Clm\CoreBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,6 +16,6 @@ class DefaultController extends ContainerAware
      */
     public function indexAction($page)
     {
-        return $this->container->get('templating')->renderResponse("ChristsLightMinistriesWebBundle:Default:$page.html.twig");
+        return $this->container->get('templating')->renderResponse("ClmCoreBundle:Default:$page.html.twig");
     }
 }
