@@ -1,3 +1,8 @@
+ClmPrayerRequestBundle:
+    resource: "@ClmPrayerRequestBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ClmCoreBundle:
     resource: "@ClmCoreBundle/Controller/"
     type:     annotation
