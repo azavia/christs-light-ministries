@@ -47,7 +47,7 @@ class PrayerRequest
      * @var string $slug
      *
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
-     * @Gedmo\Slug(fields=["subject"])
+     * @Gedmo\Slug(fields={"subject"})
      */
     private $slug;
 
