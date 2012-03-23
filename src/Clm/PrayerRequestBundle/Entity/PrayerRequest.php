@@ -72,6 +72,13 @@ class PrayerRequest
      */
     private $private;
 
+    /**
+     * @var datetime $created_at
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
 
     /**
      * Get id
@@ -211,5 +218,25 @@ class PrayerRequest
     public function isPrivate()
     {
         return $this->private;
+    }
+
+    /**
+     * Get private
+     *
+     * @return boolean 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 }

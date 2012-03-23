@@ -1,53 +1,18 @@
-<h1>PrayerRequest list</h1>
+{% extends '::base.html.twig' %}
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact_method</th>
-            <th>Phone_number</th>
-            <th>Skype_username</th>
-            <th>Subject</th>
-            <th>Prayer_request</th>
-            <th>Ip_address</th>
-            <th>Private</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for prayerRequest in prayerRequests %}
-        <tr>
-            <td><a href="{{ path('prayer-requests_show', { 'id': prayerRequest.id }) }}">{{ prayerRequest.id }}</a></td>
-            <td>{{ prayerRequest.name }}</td>
-            <td>{{ prayerRequest.email }}</td>
-            <td>{{ prayerRequest.contactmethod }}</td>
-            <td>{{ prayerRequest.phonenumber }}</td>
-            <td>{{ prayerRequest.skypeusername }}</td>
-            <td>{{ prayerRequest.subject }}</td>
-            <td>{{ prayerRequest.prayerrequest }}</td>
-            <td>{{ prayerRequest.ipaddress }}</td>
-            <td>{{ prayerRequest.private }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('prayer-requests_show', { 'id': prayerRequest.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('prayer-requests_edit', { 'id': prayerRequest.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% block title %}Prayer Requests - Christ's Light Ministries{% endblock %}
 
-<ul>
-    <li>
-        <a href="{{ path('prayer-requests_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+{% block description %}Encourage and pray for others, and post your own prayer requests.{% endblock %}
+{% block keywords %}prayer request, request prayer, prayers, prayer, encouragement{% endblock %}
+
+{% block header %}Prayer Requests{% endblock %}
+
+{% block body %}
+<p>Everyone needs prayer. Here, you may view the prayer requests of others, as well as <a href="{{path('prayer-request_new')}}">post your own request</a>.</p>
+
+{% for prayerRequest in prayerRequests %}
+<h2>{% prayerRequest.subject %}</h2>
+
+<p>{{ prayerRequest.prayerRequest|truncate(500)|nl2br }} (<a href="{{path('prayer-request_show', {"slug" = prayerRequest.slug})}}"><small>Read More</small></a>)</p>
+{% endfor %}
+{% endblock %}

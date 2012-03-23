@@ -48,6 +48,14 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            tree: false
+            sluggable: true
+            timestampable: true
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
@@ -58,3 +66,9 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Clm\UserBundle\Entity\User
+    use_listener: false
