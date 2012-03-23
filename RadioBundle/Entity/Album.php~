@@ -1,0 +1,147 @@
+<?php
+
+namespace Azavia\RadioBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Azavia\RadioBundle\Entity\Album
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Album
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var date $release_date
+     *
+     * @ORM\Column(name="release_date", type="date")
+     */
+    private $release_date;
+
+    /**
+     * @var ArrayCollection $tracks
+     *
+     * @ORM\OneToMany(targetEntity="Track", mappedBy="album")
+     */
+    private $tracks;
+
+    /**
+     * @var datetime $created_at
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    public function __construct()
+    {
+        $this->tracks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set release_date
+     *
+     * @param date $releaseDate
+     */
+    public function setReleaseDate($releaseDate)
+    {
+        $this->release_date = $releaseDate;
+    }
+
+    /**
+     * Get release_date
+     *
+     * @return date 
+     */
+    public function getReleaseDate()
+    {
+        return $this->release_date;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Add tracks
+     *
+     * @param Azavia\RadioBundle\Entity\Track $tracks
+     */
+    public function addTrack(\Azavia\RadioBundle\Entity\Track $tracks)
+    {
+        $this->tracks[] = $tracks;
+    }
+
+    /**
+     * Get tracks
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTracks()
+    {
+        return $this->tracks;
+    }
+}

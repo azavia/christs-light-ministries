@@ -19,10 +19,12 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('azavia_radio');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        
+        $rootNode
+        ->children()
+        ->scalarNode('processed_track_dir')->defaultValue('%kernel.root_dir%/uploads/tracks/processed')->end()
+        ->scalarNode('unprocessed_track_dir')->defaultValue('%kernel.root_dir%/uploads/tracks/unprocessed')->end()
+        ->end();
 
         return $treeBuilder;
     }

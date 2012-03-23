@@ -24,5 +24,8 @@ class AzaviaRadioExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+        
+        $container->setParameter('azavia_radio.processed_track_dir', $config['processed_track_dir']);
+        $container->setParameter('azavia_radio.unprocessed_track_dir', $config['unprocessed_track_dir']);
     }
 }

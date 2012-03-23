@@ -1,0 +1,93 @@
+<?php
+
+namespace Azavia\RadioBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Azavia\RadioBundle\Entity\Artist
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Artist
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var ArrayCollection $tracks
+     *
+     * @ORM\ManyToMany(targetEntity="Track", mappedBy="artists")
+     */
+    private $tracks;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function __construct()
+    {
+        $this->tracks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add tracks
+     *
+     * @param Azavia\RadioBundle\Entity\Track $tracks
+     */
+    public function addTrack(\Azavia\RadioBundle\Entity\Track $tracks)
+    {
+        $this->tracks[] = $tracks;
+    }
+
+    /**
+     * Get tracks
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTracks()
+    {
+        return $this->tracks;
+    }
+}
