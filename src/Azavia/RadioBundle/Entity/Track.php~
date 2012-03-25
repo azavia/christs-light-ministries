@@ -2,14 +2,18 @@
 
 namespace Azavia\RadioBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Azavia\RadioBundle\Entity\Track
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Azavia\RadioBundle\Entity\TrackRepository")
+ * @ORM\HasLifeCycleCallbacks
  */
 class Track
 {
@@ -24,15 +28,18 @@ class Track
 
     /**
      * @var string $filename
-     *
-     * @ORM\Column(name="filename", type="string", length=255)
      */
     private $filename;
+    
+    /**
+     * @Assert\File(maxSize="30000000")
+     */
+    private $file;
 
     /**
      * @var decimal $length
      *
-     * @ORM\Column(name="length", type="decimal")
+     * @ORM\Column(name="length", type="decimal", precision="25", scale="5")
      */
     private $length;
 
@@ -43,14 +50,14 @@ class Track
      *
      * @var string $asin
      *
-     * @ORM\Column(name="asin", type="string", length=255)
+     * @ORM\Column(name="asin", type="string", length=255, nullable="true")
      */
     private $asin;
 
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable="true")
      */
     private $title;
 
@@ -78,13 +85,14 @@ class Track
     /**
      * @var integer $year
      *
-     * @ORM\Column(name="year", type="integer")
+     * @ORM\Column(name="year", type="integer", nullable="true")
      */
     private $year;
 
     /**
      * @var datetime $created_at
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;
@@ -92,6 +100,7 @@ class Track
     /**
      * @var datetime $updated_at
      *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updated_at;
@@ -113,14 +122,25 @@ class Track
     /**
      * @var datetime $last_played_at
      *
-     * @ORM\Column(name="last_played_at", type="datetime")
+     * @ORM\Column(name="last_played_at", type="datetime", nullable="true")
      */
     private $last_played_at;
+
+    /**
+     * @var ArrayCollection $performances
+     *
+     * @ORM\OneToMany(targetEntity="Performance", mappedBy="track")
+     */
+    private $performances;
+    
+    private $unprocessed_track_dir;
+    private $processed_track_dir;
 
     public function __construct()
     {
         $this->artists = new \Doctrine\Common\Collections\ArrayCollection();
     $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->play_count = 0;
     }
     
     /**
@@ -141,6 +161,7 @@ class Track
     public function setFilename($filename)
     {
         $this->filename = $filename;
+        $this->file = new File($this->unprocessed_track_dir . '/' . $filename);
     }
 
     /**
@@ -151,6 +172,24 @@ class Track
     public function getFilename()
     {
         return $this->filename;
+    }
+    
+    /**
+     * Set file
+     *
+     * @param File $file
+     */
+    public function setFile(\Symfony\Component\HttpFoundation\File\File $file)
+    {
+        $this->file = $file;
+    }
+    
+    /**
+     * Get the file for this track.
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
@@ -234,16 +273,6 @@ class Track
     }
 
     /**
-     * Set created_at
-     *
-     * @param datetime $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-    }
-
-    /**
      * Get created_at
      *
      * @return datetime 
@@ -251,16 +280,6 @@ class Track
     public function getCreatedAt()
     {
         return $this->created_at;
-    }
-
-    /**
-     * Set updated_at
-     *
-     * @param datetime $updatedAt
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
     }
 
     /**
@@ -373,4 +392,83 @@ class Track
         return $this->genres;
     }
 
+
+    /**
+     * Set length
+     *
+     * @param decimal $length
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    }
+
+    /**
+     * Get length
+     *
+     * @return decimal 
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Add composers
+     *
+     * @param Azavia\RadioBundle\Entity\Composer $composers
+     */
+    public function addComposer(\Azavia\RadioBundle\Entity\Composer $composers)
+    {
+        $this->composers[] = $composers;
+    }
+
+    /**
+     * Get composers
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getComposers()
+    {
+        return $this->composers;
+    }
+    
+    public function setUnprocessedTrackDir($unprocessed_track_dir)
+    {
+        $this->unprocessed_track_dir = $unprocessed_track_dir;
+    }
+    
+    public function getUnprocessedTrackDir()
+    {
+        return $this->unprocessed_track_dir;
+    }
+    
+    public function setProcessedTrackDir($processed_track_dir)
+    {
+        $this->processed_track_dir = $processed_track_dir;
+    }
+    
+    public function getProcessedTrackDir()
+    {
+        return $this->processed_track_dir;
+    }
+    
+    /**
+     * @ORM\PostPersist()
+     */
+    public function upload()
+    {
+        if ($this->file)
+        {
+            $this->file->move($this->processed_track_dir, $this->id . '.mp3');
+        }
+    }
+    
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeUpload()
+    {
+        unlink($this->processed_track_dir . DIRECTORY_SEPARATOR . $this->id . '.mp3');
+    }
 }

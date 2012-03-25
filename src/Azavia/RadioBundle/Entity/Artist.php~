@@ -9,26 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Azavia\RadioBundle\Entity\Artist
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Azavia\RadioBundle\Entity\ArtistRepository")
  */
-class Artist
+class Artist extends Contributor
 {
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
     /**
      * @var ArrayCollection $tracks
      *
@@ -36,36 +20,6 @@ class Artist
      */
     private $tracks;
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
     public function __construct()
     {
         $this->tracks = new \Doctrine\Common\Collections\ArrayCollection();

@@ -125,6 +125,13 @@ class Track
      * @ORM\Column(name="last_played_at", type="datetime", nullable="true")
      */
     private $last_played_at;
+
+    /**
+     * @var ArrayCollection $performances
+     *
+     * @ORM\OneToMany(targetEntity="Performance", mappedBy="track")
+     */
+    private $performances;
     
     private $unprocessed_track_dir;
     private $processed_track_dir;
@@ -463,5 +470,25 @@ class Track
     public function removeUpload()
     {
         unlink($this->processed_track_dir . DIRECTORY_SEPARATOR . $this->id . '.mp3');
+    }
+
+    /**
+     * Add performances
+     *
+     * @param Azavia\RadioBundle\Entity\Performance $performances
+     */
+    public function addPerformance(\Azavia\RadioBundle\Entity\Performance $performances)
+    {
+        $this->performances[] = $performances;
+    }
+
+    /**
+     * Get performances
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPerformances()
+    {
+        return $this->performances;
     }
 }

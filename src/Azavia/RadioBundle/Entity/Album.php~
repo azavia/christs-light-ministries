@@ -2,6 +2,7 @@
 
 namespace Azavia\RadioBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +33,7 @@ class Album
     /**
      * @var date $release_date
      *
-     * @ORM\Column(name="release_date", type="date")
+     * @ORM\Column(name="release_date", type="date", nullable="true")
      */
     private $release_date;
 
@@ -46,6 +47,7 @@ class Album
     /**
      * @var datetime $created_at
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;

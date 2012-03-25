@@ -24,7 +24,10 @@ class TrackLoader
     protected $processed_track_dir;
     protected $unprocessed_track_dir;
     
-    public function __construct(Registry $doctrine, $processed_track_dir, $unprocessed_track_dir)
+    public function __construct(
+            Registry $doctrine,
+            $processed_track_dir,
+            $unprocessed_track_dir)
     {
         $this->doctrine = $doctrine;
         $this->processed_track_dir = $processed_track_dir;
@@ -32,6 +35,16 @@ class TrackLoader
         $this->checkPaths();
     }
     
+    /**
+     * Load unprocessed tracks into the database.
+     *
+     * This method will process all tracks in the unprocessed track
+     * directory, move them to the processed track directory, and enter its
+     * metadata into the database.
+     * 
+     * @access public
+     * @return void
+     */
     public function loadUnprocessedTracks()
     {
         $iterator = Finder::create()
@@ -45,6 +58,9 @@ class TrackLoader
         
         $id3 = new \GetId3_GetId3;
         
+        // For each unprocessed track, read its metadata, save the track
+        // with its metadata to the database, and move the track to the
+        // processed tracks directory.
         foreach ($iterator as $file)
         {
             $tags = $id3->analyze($file->getRealPath());
@@ -59,18 +75,17 @@ class TrackLoader
             $track->setFilename($data['filename']);
             $track->setLength($data['length']);
             
-            if (isset($data['title']))
-            {
+            if (isset($data['title'])) {
                 $track->setTitle($data['title']);
             }
             
-            if (isset($data['album']))
-            {
-                $album = $this->doctrine->getRepository('AzaviaRadioBundle:Album')
-                ->findOneByName($data['album']);
+            if (isset($data['album'])) {
+                $album = $this->doctrine->
+                    getRepository(
+                            'AzaviaRadioBundle:Album'
+                            )->findOneByName($data['album']);
                 
-                if (!$album)
-                {
+                if (!$album) {
                     $album = new Album;
                     $album->setName($data['album']);
                     $em->persist($album);
@@ -79,10 +94,11 @@ class TrackLoader
                 $track->setAlbum($album);
             }
             
-            if (isset($data['artists']))
-            {
-                $artists = $this->doctrine->getRepository('AzaviaRadioBundle:Artist')
-                ->parse($data['artists']);
+            if (isset($data['artists'])) {
+                $artists = $this->doctrine->
+                    getRepository(
+                            'AzaviaRadioBundle:Artist'
+                            )->parse($data['artists']);
                 
                 foreach ($artists as $artist)
                 {
@@ -90,10 +106,11 @@ class TrackLoader
                 }
             }
             
-            if (isset($data['composers']))
-            {
-                $composers = $this->doctrine->getRepository('AzaviaRadioBundle:Composer')
-                ->parse($data['composers']);
+            if (isset($data['composers'])) {
+                $composers = $this->doctrine->
+                    getRepository(
+                            'AzaviaRadioBundle:Composer'
+                            )->parse($data['composers']);
                 
                 foreach ($composers as $composer)
                 {
@@ -101,19 +118,19 @@ class TrackLoader
                 }
             }
             
-            if (isset($data['year']))
-            {
+            if (isset($data['year'])) {
                 $track->setYear(intval($data['year']));
             }
             
-            if (isset($data['genres']))
-            {
+            if (isset($data['genres'])) {
                 foreach ($data['genres'] as $genre)
                 {
-                    $genreObject = $this->doctrine->getRepository('AzaviaRadioBundle:Genre')
-                    ->findOneByGenre($genre);
-                    if (!$genreObject)
-                    {
+                    $genreObject = $this->doctrine
+                        ->getRepository(
+                                'AzaviaRadioBundle:Genre'
+                                )->findOneByGenre($genre);
+
+                    if (!$genreObject) {
                         $genreObject = new Genre;
                         $genreObject->setGenre($genre);
                         $em->persist($genreObject);
