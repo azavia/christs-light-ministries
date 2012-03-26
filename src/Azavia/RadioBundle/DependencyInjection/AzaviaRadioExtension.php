@@ -26,5 +26,7 @@ class AzaviaRadioExtension extends Extension
         $loader->load('services.xml');
         $container->setParameter('azavia_radio.processed_track_dir', $config['processed_track_dir']);
         $container->setParameter('azavia_radio.unprocessed_track_dir', $config['unprocessed_track_dir']);
+        $container->setParameter('azavia_radio.live365_username', $config['live365_username']);
+        $container->setParameter('azavia_radio.live365_password', $config['live365_password']);
     }
 }
