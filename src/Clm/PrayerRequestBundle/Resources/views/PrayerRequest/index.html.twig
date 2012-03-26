@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Prayer Requests - Christ's Light Ministries{% endblock %}
+
+{% block description %}Encourage and pray for others, and post your own prayer requests.{% endblock %}
+{% block keywords %}prayer request, request prayer, prayers, prayer, encouragement{% endblock %}
+
+{% block header %}Prayer Requests{% endblock %}
+
+{% block body %}
+<p>Everyone needs prayer. Here, you may view the prayer requests of others, as well as <a href="{{path('prayer-request_new')}}">post your own request</a>.</p>
+
+{% for prayerRequest in prayerRequests %}
+<h2>{% prayerRequest.subject %}</h2>
+
+<p>{{ prayerRequest.prayerRequest|truncate(500)|nl2br }} (<a href="{{path('prayer-request_show', {"slug" = prayerRequest.slug})}}"><small>Read More</small></a>)</p>
+{% endfor %}
+{% endblock %}
