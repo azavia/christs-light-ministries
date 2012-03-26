@@ -23,6 +23,8 @@ class Configuration implements ConfigurationInterface
         ->children()
         ->scalarNode('processed_track_dir')->defaultValue('%kernel.root_dir%/uploads/tracks/processed')->end()
         ->scalarNode('unprocessed_track_dir')->defaultValue('%kernel.root_dir%/uploads/tracks/unprocessed')->end()
+        ->scalarNode('live365_username')->defaultValue('christs_light')->end()
+        ->scalarNode('live365_password')->defaultValue('piano2188')->end()
         ->end();
 
         return $treeBuilder;

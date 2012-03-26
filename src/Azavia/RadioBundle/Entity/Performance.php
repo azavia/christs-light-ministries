@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Azavia\RadioBundle\Entity\PerformanceRepository")
+ * @ORM\HasLifeCycleCallbacks()
  */
 class Performance
 {
@@ -85,4 +86,19 @@ class Performance
     {
         return $this->track;
     }
+
+    // {{{ incrementPlayCount
+
+    /**
+     * Increments the play count of the track.
+     *
+     * @ORM\prePersist
+     */
+    public function incrementPlayCount()
+    {
+        $this->getTrack()->setPlayCount(
+                $this->getTrack()->getPlayCount() + 1);
+    }
+
+    // }}}
 }

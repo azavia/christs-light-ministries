@@ -6,3 +6,4 @@ vendor/
 app/config/parameters.ini
 .DS_Store
 *.php~
+app/uploads/

@@ -491,4 +491,28 @@ class Track
     {
         return $this->performances;
     }
+
+    // {{{ getArtistString()
+
+    public function getArtistString()
+    {
+        $artistString = '';
+        $artistCount = count($this->getArtists());
+
+        foreach ($this->getArtists() as $i => $artist)
+        {
+if ($i > 0 && $i < $artistCount-1) {
+    $artistString .= ', ';
+}
+elseif ($i == $artistCount-1 && $artistCount > 1) {
+    $artistString .= ' & ';
+}
+
+$artistString .= $artist->getName();
+        }
+
+return $artistString;
+    }
+
+    // }}}
 }

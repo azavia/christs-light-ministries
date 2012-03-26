@@ -6,8 +6,12 @@
 
     <parameters>
         <parameter key="azavia_radio.track_loader.class">Azavia\RadioBundle\TrackLoader</parameter>
+        <parameter key="azavia_radio.track_scheduler.class">Azavia\RadioBundle\TrackScheduler</parameter>
+        <parameter key="azavia_radio.metadata_updater.class">Azavia\RadioBundle\MetadataUpdater</parameter>
         <parameter key="azavia_radio.processed_track_dir"></parameter>
         <parameter key="azavia_radio.unprocessed_track_dir"></parameter>
+        <parameter key="azavia_radio.live365_username"></parameter>
+        <parameter key="azavia_radio.live365_password"></parameter>
     </parameters>
 
     <services>
@@ -15,6 +19,20 @@
             <argument type="service" id="doctrine" />
             <argument>%azavia_radio.processed_track_dir%</argument>
             <argument>%azavia_radio.unprocessed_track_dir%</argument>
+        </service>
+
+        <service
+        id="azavia_radio.track_scheduler"
+        class="%azavia_radio.track_scheduler.class%">
+            <argument type="service" id="doctrine" />
+            <argument>%azavia_radio.processed_track_dir%</argument>
+        </service>
+
+        <service
+        id="azavia_radio.metadata_updater"
+        class="%azavia_radio.metadata_updater.class%">
+        <argument>%azavia_radio.live365_username%</argument>
+        <argument>%azavia_radio.live365_password%</argument>
         </service>
     </services>
 </container>
