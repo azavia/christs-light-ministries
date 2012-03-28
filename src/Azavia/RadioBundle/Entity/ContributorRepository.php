@@ -29,13 +29,25 @@ abstract class ContributorRepository extends EntityRepository
             
             foreach ($contributorList as $contributorListItem)
             {
-                $contributorParts = explode('&', $contributorListItem);
+                $contributorParts = explode('&', trim($contributorListItem));
                 foreach ($contributorParts as $contributorPart)
                 {
+$name = trim($contributorPart);
+if (strlen($name) == 0) {
+continue;
+}
+
                     $entityClass = ($this->getEntityClass());
+
+$contributorObject = $this->getEntityManager()
+->getRepository($entityClass)
+->findOneByName($name);
+
+if (!$contributorObject) {
                     $contributorObject = new $entityClass();
-                    $contributorObject->setName(trim($contributorPart));
+                    $contributorObject->setName($name);
                     $this->getEntityManager()->persist($contributorObject);
+}
                     
                     $contributorObjects[] = $contributorObject;
                 }
