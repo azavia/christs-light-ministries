@@ -19,7 +19,7 @@ $loader->registerNamespaces(array(
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
 ));
 $loader->registerPrefixes(array(
-            'GetId3_' => __DIR__ . '/../vendor/GetId3/lib',
+            'GetId3_' => __DIR__ . '/../vendor/getid3/lib',
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
     'Twig_'            => __DIR__.'/../vendor/twig/lib',
 ));
