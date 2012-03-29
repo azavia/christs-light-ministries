@@ -28,5 +28,17 @@ class AzaviaRadioExtension extends Extension
         $container->setParameter('azavia_radio.unprocessed_track_dir', $config['unprocessed_track_dir']);
         $container->setParameter('azavia_radio.live365_username', $config['live365_username']);
         $container->setParameter('azavia_radio.live365_password', $config['live365_password']);
+        $container->setParameter(
+                'azavia_radio.twitter.consumer_key',
+                $config['twitter']['consumer_key']);
+        $container->setParameter(
+                'azavia_radio.twitter.consumer_secret',
+                $config['twitter']['consumer_secret']);
+        $container->setParameter(
+                'azavia_radio.twitter.access_token',
+                $config['twitter']['access_token']);
+        $container->setParameter(
+                'azavia_radio.twitter.access_token_secret',
+                $config['twitter']['access_token_secret']);
     }
 }

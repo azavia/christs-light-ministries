@@ -20,6 +20,7 @@ $loader->registerNamespaces(array(
 ));
 $loader->registerPrefixes(array(
             'GetId3_' => __DIR__ . '/../vendor/getid3/lib',
+            'EpiTwitter_' => __DIR__ . '/../vendor/twitter-async/lib',
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
     'Twig_'            => __DIR__.'/../vendor/twig/lib',
 ));

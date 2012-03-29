@@ -8,10 +8,15 @@
         <parameter key="azavia_radio.track_loader.class">Azavia\RadioBundle\TrackLoader</parameter>
         <parameter key="azavia_radio.track_scheduler.class">Azavia\RadioBundle\TrackScheduler</parameter>
         <parameter key="azavia_radio.metadata_updater.class">Azavia\RadioBundle\MetadataUpdater</parameter>
+        <parameter key="azavia_radio.twitter.class">Azavia\RadioBundle\TwitterStatusUpdater</parameter>
         <parameter key="azavia_radio.processed_track_dir"></parameter>
         <parameter key="azavia_radio.unprocessed_track_dir"></parameter>
         <parameter key="azavia_radio.live365_username"></parameter>
         <parameter key="azavia_radio.live365_password"></parameter>
+        <parameter key="azavia_radio.twitter.consumer_key"></parameter>
+        <parameter key="azavia_radio.twitter.consumer_secret"></parameter>
+        <parameter key="azavia_radio.twitter.access_token"></parameter>
+        <parameter key="azavia_radio.twitter.access_token_secret"></parameter>
     </parameters>
 
     <services>
@@ -33,6 +38,15 @@
         class="%azavia_radio.metadata_updater.class%">
         <argument>%azavia_radio.live365_username%</argument>
         <argument>%azavia_radio.live365_password%</argument>
+        </service>
+
+        <service
+        id="azavia_radio.twitter_status_updater"
+        class="%azavia_radio.twitter.class%">
+        <argument>%azavia_radio.twitter.consumer_key%</argument>
+        <argument>%azavia_raio.twitter.consumer_secret</argument>
+        <argument>%azavia_radio.twitter.access_token</argument>
+        <argument>%azavia_radio.twitter.access_token_secret</argument>
         </service>
     </services>
 </container>

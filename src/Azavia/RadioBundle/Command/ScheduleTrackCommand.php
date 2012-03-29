@@ -25,5 +25,9 @@ $output->writeln(
 $metadataUpdater = $this->getContainer()
     ->get('azavia_radio.metadata_updater');
 $metadataUpdater->updateMetadata($track);
+
+$twitterStatusUpdater = $this->getContainer()
+    ->get('azavia_radio.twitter_status_updater');
+$twitterStatusUpdater->updateStatus($track);
     }
 }

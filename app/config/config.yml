@@ -72,3 +72,10 @@ fos_user:
     firewall_name: main
     user_class: Clm\UserBundle\Entity\User
     use_listener: false
+
+azavia_radio:
+    twitter:
+        consumer_key: hkTgJ6f3tgMVuOK9hbA1Ag
+        consumer_secret: 9TTNJxAG2hvQqxBVnr5Vl7tMYUjuCLTemytu9XtD0
+        access_token: 539600584-LjLlspakqrFnlfZ2I1Yek6is2mjoZ3wqTW0IDi6y
+        access_token_secret: AwYPtkjQyTuOPv8V04wOAGR5XNseyBUosfLxjwV0rw
