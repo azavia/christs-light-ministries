@@ -69,20 +69,36 @@ class TwitterStatusUpdater
     public function updateStatus(Track $track)
     {
         $title = $track->getTitle();
+        if (!$title) {
+            if ($track->getAlbum()) {
+            $title = $track->getAlbum()->getName();
+            }
+        }
+
         if (count($track->getArtists())) {
             $artist = $track->getArtistString();
         }
 
-        $status = "Now playing: $artist - $title - ";
+        $status = "Now playing: " .
+            (isset($artist) ? "$artist - " : '') .
+            ($title ? "$title - " : '');
+
+        // If the status is empty, we have no identifiable information for
+        // the track, so why post it?
+        if (strlen($status) == 0) {
+            return;
+        }
+
         if (strlen($status) > 115) {
-            $status = "$artist - $title";
+        $status = (isset($artist) ? "$artist - " : '') .
+            ($title ? "$title - " : '');
 
             if (strlen($status) > 115) {
-                $status = $title;
+                $status = ($title ? $title : $artist);
 
                 if (strlen($status) > 115) {
-                    $status = $this->truncate($title, 110);
-                    $status .= ' ...';
+                    $status = $this->truncate($status, 110);
+                    $status .= '... - ';
                 }
             }
         }

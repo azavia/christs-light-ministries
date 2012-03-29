@@ -44,7 +44,7 @@
         id="azavia_radio.twitter_status_updater"
         class="%azavia_radio.twitter.class%">
         <argument>%azavia_radio.twitter.consumer_key%</argument>
-        <argument>%azavia_raio.twitter.consumer_secret</argument>
+        <argument>%azavia_radio.twitter.consumer_secret</argument>
         <argument>%azavia_radio.twitter.access_token</argument>
         <argument>%azavia_radio.twitter.access_token_secret</argument>
         </service>
