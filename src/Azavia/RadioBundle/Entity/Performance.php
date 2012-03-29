@@ -98,6 +98,8 @@ class Performance
     {
         $this->getTrack()->setPlayCount(
                 $this->getTrack()->getPlayCount() + 1);
+$this->getTrack()->setLastPlayedAt(
+new \DateTime());
     }
 
     // }}}

@@ -19,10 +19,6 @@ class TrackRepository extends EntityRepository
 
     public function scheduleTrack()
     {
-        $em = $this->getEntityManager();
-
-        $qb = $em->createQueryBuilder();
-
         $tracks = $this->findAll();
 
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -65,7 +61,7 @@ class TrackRepository extends EntityRepository
             }
 
             if ($performance->getPlayedAt() > $artistMargin) {
-                foreach ($performance->getTrack()->getArtists() as $atist)
+                foreach ($performance->getTrack()->getArtists() as $artist)
                 {
                     $excludedArtists[] = $artist->getName();
                 }
@@ -121,19 +117,42 @@ class TrackRepository extends EntityRepository
                 }
             }
 
-            foreach ($track->getArtists() as $artist)
-            {
-                if (in_array($artist->getName(), $excludedArtists)) {
-                    continue 2;
-                }
+            if (in_array($track->getArtistString(), $excludedArtists)) {
+                continue;
             }
 
             $filteredTracks[] = $track;
         }
 
+        // Optional filter: do not repeat tracks within 12 hours
+        // If this leaves us with no track, then this filter is discarded.
+
+        $noRepeatTracks = array();
+
+        foreach ($filteredTracks as $track)
+        {
+            if ($track->getLastPlayedAt()) {
+                $noRepeatTime = new \DateTime('-12 hours');
+                if ($track->getLastPlayedAt() >= $noRepeatTime) {
+                    continue;
+                }
+            }
+
+            $noRepeatTracks[] = $track;
+        }
+
+        if (count($noRepeatTracks)) {
+            $filteredTracks = $noRepeatTracks;
+        }
+
         // }}}
 
-        return $filteredTracks[array_rand($filteredTracks)];
+        if (count($filteredTracks)) {
+            return $filteredTracks[array_rand($filteredTracks)];
+        }
+        else {
+            return $tracks[array_rand($tracks)];
+        }
     }
 
     // }}}

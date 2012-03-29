@@ -1,10 +1,10 @@
-ClmUserBundle:
-    resource: "@ClmUserBundle/Controller/"
+ClmPrayerRequestBundle:
+    resource: "@ClmPrayerRequestBundle/Controller/"
     type:     annotation
     prefix:   /
 
-ClmPrayerRequestBundle:
-    resource: "@ClmPrayerRequestBundle/Controller/"
+ClmUserBundle:
+    resource: "@ClmUserBundle/Controller/"
     type:     annotation
     prefix:   /
 
